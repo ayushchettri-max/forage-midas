@@ -19,6 +19,9 @@ public class TaskFourTests {
 
     @Autowired
     private UserPopulator userPopulator;
+    // Inside TaskFourTests.java after transactions processing
+
+
 
     @Autowired
     private FileLoader fileLoader;
@@ -41,6 +44,8 @@ public class TaskFourTests {
         while (true) {
             Thread.sleep(20000);
             logger.info("...");
+
+            
         }
     }
 }

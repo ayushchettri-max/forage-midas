@@ -1,24 +1,27 @@
 package com.jpmc.midascore;
 
-import com.jpmc.midascore.component.DatabaseConduit;
-import com.jpmc.midascore.entity.UserRecord;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jpmc.midascore.entity.User;
+import com.jpmc.midascore.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserPopulator {
-    @Autowired
-    private FileLoader fileLoader;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private DatabaseConduit databaseConduit;
+    public UserPopulator(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void populate() {
-        String[] userLines = fileLoader.loadStrings("/test_data/lkjhgfdsa.hjkl");
-        for (String userLine : userLines) {
-            String[] userData = userLine.split(", ");
-            UserRecord user = new UserRecord(userData[0], Float.parseFloat(userData[1]));
-            databaseConduit.save(user);
-        }
+        // Example users
+        User waldorf = new User();
+        waldorf.setUsername("waldorf");
+        waldorf.setBalance(1000f);
+        userRepository.save(waldorf);
+
+        User statler = new User();
+        statler.setUsername("statler");
+        statler.setBalance(500f);
+        userRepository.save(statler);
     }
 }
